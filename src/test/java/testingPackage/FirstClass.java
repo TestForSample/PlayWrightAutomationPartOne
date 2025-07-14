@@ -1,22 +1,22 @@
 package testingPackage;
 
+import base.BaseClass;
 import com.microsoft.playwright.*;
 import org.example.tests.page.HomePage;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class FirstClass {
-private Playwright playwright;
-private Browser browser;
-private Page page;
+import java.io.IOException;
+
+
+public class FirstClass extends BaseClass {
+
 private HomePage homePage;
     @BeforeClass
-    public void setUp(){
-        playwright=Playwright.create();
-        browser=playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-        page=browser.newPage();
-        page.setViewportSize(1500,703);
+    public void settingUp() throws IOException {
+        setUp();
         homePage=new HomePage(page);
     }
     @Test
@@ -24,11 +24,21 @@ private HomePage homePage;
         homePage.navigateToThePage("https://www.browserstack.com/");
        homePage.hoverTheElement();
        homePage.selectTheDev("Support");
+        Assert.assertEquals(page.title(),"Support | BrowserStack");
+       homePage.searchInput("playwright");
+       page.keyboard().press("Enter");
+       page.waitForURL("https://www.browserstack.com/search?query=playwright&type=support&referrer=support");
+Assert.assertTrue(page.url().contains("https://www.browserstack.com/search?query=playwright&type=support&referrer=support"));
         }
 
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() throws InterruptedException {
+
+        browserContext.close();
         browser.close(new Browser.CloseOptions().setReason("close as the test completion"));
+        playwright.close();
+
+
     }
 }
