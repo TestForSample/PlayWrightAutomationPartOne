@@ -24,7 +24,7 @@ public class BaseClass {
 
     public void setUp() throws IOException {
         playwright= Playwright.create();
-        browser=playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        browser=playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
         Path videoDir= Paths.get("videos");
         Files.createDirectories(videoDir);
         Browser.NewContextOptions contextOptions = new Browser.NewContextOptions()
