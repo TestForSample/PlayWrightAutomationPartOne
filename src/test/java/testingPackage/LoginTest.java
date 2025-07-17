@@ -28,7 +28,7 @@ public class LoginTest extends BaseClass {
     }
     @Test(dataProvider = "loginTest",dataProviderClass= UtilClass.class)
     public void loginTest(String username,String password){
-        homePage.navigateToThePage("https://www.echannelling.com/");
+        homePage.navigateToThePage("https://www.example.com/");
         page.locator("xpath=/html/body/div[1]/div[1]/div/div/div[2]/button").click();
 //        loginPage.setUsername(username);
 //        loginPage.setPassword(password);
