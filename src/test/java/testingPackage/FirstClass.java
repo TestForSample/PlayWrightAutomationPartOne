@@ -21,14 +21,14 @@ private HomePage homePage;
     }
     @Test
     public void testOne(){
-        homePage.navigateToThePage("https://www.browserstack.com/");
+        homePage.navigateToThePage("https://www.example.com/");
        homePage.hoverTheElement();
        homePage.selectTheDev("Support");
         Assert.assertEquals(page.title(),"Support | BrowserStack");
        homePage.searchInput("playwright");
        page.keyboard().press("Enter");
-       page.waitForURL("https://www.browserstack.com/search?query=playwright&type=support&referrer=support");
-Assert.assertTrue(page.url().contains("https://www.browserstack.com/search?query=playwright&type=support&referrer=support"));
+       page.waitForURL("https://www.example.com/search?query=playwright&type=support&referrer=support");
+Assert.assertTrue(page.url().contains("https://www.example.com/search?query=playwright&type=support&referrer=support"));
         }
 
 
